@@ -19,8 +19,8 @@ public static class DependencyInjection
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        // AutoMapper
-        services.AddAutoMapper(assembly);
+        // AutoMapper 16+ registration
+        services.AddAutoMapper(cfg => { }, assembly);
 
         // FluentValidation
         services.AddValidatorsFromAssembly(assembly);
