@@ -82,6 +82,18 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+// ===== Database Seeding =====
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<SubhashPortfolio.Infrastructure.Persistence.Context.ApplicationDbContext>();
+    var passwordHasher = services.GetRequiredService<SubhashPortfolio.Application.Common.Interfaces.IPasswordHasher>();
+    var dateTimeService = services.GetRequiredService<SubhashPortfolio.Application.Common.Interfaces.IDateTimeService>();
+
+    await SubhashPortfolio.Infrastructure.Persistence.Seed.DatabaseSeeder.SeedAsync(context, passwordHasher, dateTimeService);
+}
+// ===== End Database Seeding =====
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
