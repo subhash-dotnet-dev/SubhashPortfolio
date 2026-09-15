@@ -1,4 +1,4 @@
-using SubhashPortfolio.Application.Common.Exceptions;
+﻿using SubhashPortfolio.Application.Common.Exceptions;
 using SubhashPortfolio.Application.Common.Interfaces;
 using SubhashPortfolio.Application.Features.Contact.DTOs;
 using SubhashPortfolio.Domain.Enums;
@@ -9,11 +9,16 @@ public class ContactService : IContactService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
+    private readonly IEmailService _emailService;
 
-    public ContactService(IUnitOfWork unitOfWork, IDateTimeService dateTimeService)
+    public ContactService(
+        IUnitOfWork unitOfWork,
+        IDateTimeService dateTimeService,
+        IEmailService emailService)
     {
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
+        _emailService = emailService;
     }
 
     public async Task<ContactMessageDto> SubmitAsync(
@@ -37,6 +42,14 @@ public class ContactService : IContactService
 
         await _unitOfWork.ContactMessages.AddAsync(message, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        // Send email notification to admin (non-blocking)
+        await _emailService.SendContactNotificationAsync(
+            dto.Name, dto.Email, dto.Phone, dto.Subject, dto.Message, cancellationToken);
+
+        // Send auto-reply to sender (non-blocking)
+        await _emailService.SendAutoReplyAsync(
+            dto.Name, dto.Email, dto.Subject, cancellationToken);
 
         return MapToDto(message);
     }
@@ -81,24 +94,21 @@ public class ContactService : IContactService
         var message = await _unitOfWork.ContactMessages.GetByIdAsync(id, cancellationToken)
             ?? throw new NotFoundException("ContactMessage", id);
 
-        message.IsDeleted = true;
-        message.UpdatedAt = _dateTimeService.UtcNow;
-
-        _unitOfWork.ContactMessages.Update(message);
+        _unitOfWork.ContactMessages.Remove(message);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 
-    private static ContactMessageDto MapToDto(SubhashPortfolio.Domain.Entities.ContactMessage c) => new()
+    private static ContactMessageDto MapToDto(SubhashPortfolio.Domain.Entities.ContactMessage message) => new()
     {
-        Id = c.Id,
-        Name = c.Name,
-        Email = c.Email,
-        Phone = c.Phone,
-        Subject = c.Subject,
-        Message = c.Message,
-        Status = c.Status,
-        CreatedAt = c.CreatedAt,
-        ReadAt = c.ReadAt,
-        RepliedAt = c.RepliedAt
+        Id = message.Id,
+        Name = message.Name,
+        Email = message.Email,
+        Phone = message.Phone,
+        Subject = message.Subject,
+        Message = message.Message,
+        Status = message.Status,
+        CreatedAt = message.CreatedAt,
+        ReadAt = message.ReadAt,
+        RepliedAt = message.RepliedAt
     };
 }

@@ -1,4 +1,4 @@
-using SubhashPortfolio.Application.Common.Interfaces;
+﻿using SubhashPortfolio.Application.Common.Interfaces;
 using SubhashPortfolio.Domain.Entities;
 using SubhashPortfolio.Domain.Enums;
 using SubhashPortfolio.Infrastructure.Persistence.Context;
@@ -21,7 +21,7 @@ public static class SocialLinkSeeder
                 Id = Guid.NewGuid(),
                 Platform = SocialPlatform.GitHub,
                 DisplayName = "GitHub",
-                Url = "https://github.com/subhashyadav",
+                Url = "https://github.com/subhash-dotnet-dev",
                 IconClass = "fab fa-github",
                 DisplayOrder = 1,
                 IsVisible = true,
@@ -33,7 +33,7 @@ public static class SocialLinkSeeder
                 Id = Guid.NewGuid(),
                 Platform = SocialPlatform.LinkedIn,
                 DisplayName = "LinkedIn",
-                Url = "https://www.linkedin.com/in/subhashyadav",
+                Url = "https://www.linkedin.com/in/subhash-dotnet-dev/",
                 IconClass = "fab fa-linkedin",
                 DisplayOrder = 2,
                 IsVisible = true,
@@ -57,7 +57,7 @@ public static class SocialLinkSeeder
                 Id = Guid.NewGuid(),
                 Platform = SocialPlatform.HackerRank,
                 DisplayName = "HackerRank",
-                Url = "https://hackerrank.com/subhashyadav",
+                Url = "https://www.hackerrank.com/profile/subhash_dev",
                 IconClass = "fab fa-hackerrank",
                 DisplayOrder = 4,
                 IsVisible = true,
@@ -69,7 +69,7 @@ public static class SocialLinkSeeder
                 Id = Guid.NewGuid(),
                 Platform = SocialPlatform.Instagram,
                 DisplayName = "Instagram",
-                Url = "https://instagram.com/subhash.yadav",
+                Url = "https://www.instagram.com/visionsubhash/",
                 IconClass = "fab fa-instagram",
                 DisplayOrder = 5,
                 IsVisible = true,
@@ -81,7 +81,7 @@ public static class SocialLinkSeeder
                 Id = Guid.NewGuid(),
                 Platform = SocialPlatform.Facebook,
                 DisplayName = "Facebook",
-                Url = "https://facebook.com/subhash.yadav",
+                Url = "https://www.facebook.com/VisionSubhash",
                 IconClass = "fab fa-facebook",
                 DisplayOrder = 6,
                 IsVisible = true,

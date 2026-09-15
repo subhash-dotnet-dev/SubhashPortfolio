@@ -1,0 +1,143 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- ═══════════════ FAVICONS ═══════════════ -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="mask-icon" href="/favicon.svg" color="#3b82f6" />
+
+    <!-- ═══════════════ PRIMARY META ═══════════════ -->
+    <title>Subhash Yadav · .NET Full Stack Developer</title>
+    <meta name="title" content="Subhash Yadav · .NET Full Stack Developer" />
+    <meta name="description" content="Subhash Yadav — .NET Full Stack Developer crafting scalable, user-focused web applications with C#, ASP.NET Core, React, and SQL Server. Explore my portfolio, projects, and skills." />
+    <meta name="author" content="Subhash Yadav" />
+    <meta name="keywords" content="Subhash Yadav, .NET Developer, Full Stack Developer, ASP.NET Core, React, TypeScript, C#, Entity Framework, Portfolio, Web Developer, Hyderabad, India, Software Engineer" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- ═══════════════ THEME ═══════════════ -->
+    <meta name="theme-color" content="#050914" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- ═══════════════ OPEN GRAPH ═══════════════ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Subhash Yadav Portfolio" />
+    <meta property="og:url" content="https://subhashyadav.dev/" />
+    <meta property="og:title" content="Subhash Yadav · .NET Full Stack Developer" />
+    <meta property="og:description" content="Building modern web applications across frontend, backend, APIs, and databases." />
+    <meta property="og:image" content="/images/profile/profile.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ═══════════════ TWITTER ═══════════════ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Subhash Yadav · .NET Full Stack Developer" />
+    <meta name="twitter:description" content="Building modern web applications across frontend, backend, APIs, and databases." />
+    <meta name="twitter:image" content="/images/profile/profile.png" />
+
+    <!-- ═══════════════ PERFORMANCE ═══════════════ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="preload" as="image" href="/images/profile/profile.png" />
+
+    <!-- ═══════════════ FONTS ═══════════════ -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- ═══════════════ INLINE BOOT LOADER ═══════════════ -->
+    <style>
+      /* Pre-React boot screen — prevents white flash */
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #050914;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      html[data-theme='light'] body { background: #f8fafc; }
+
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(ellipse at center, #0a1224 0%, #050914 70%);
+        z-index: 9999;
+        transition: opacity 0.4s ease;
+      }
+      html[data-theme='light'] #boot {
+        background: radial-gradient(ellipse at center, #ffffff 0%, #f8fafc 70%);
+      }
+      #boot.boot-hide { opacity: 0; pointer-events: none; }
+
+      #boot .boot-logo {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #3b82f6 0%, #22d3ee 50%, #8b5cf6 100%);
+        box-shadow: 0 20px 60px -12px rgba(59,130,246,0.7), 0 0 60px -10px rgba(34,211,238,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: -0.05em;
+        animation: boot-pulse 1.4s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+      #boot .boot-logo::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
+        background-size: 200% 200%;
+        animation: boot-shine 2s ease-in-out infinite;
+      }
+      @keyframes boot-pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.06); }
+      }
+      @keyframes boot-shine {
+        0%, 100% { background-position: 100% 100%; opacity: 0; }
+        50% { background-position: 0% 0%; opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Pre-React boot screen -->
+    <div id="boot">
+      <div class="boot-logo">SY</div>
+    </div>
+
+    <!-- React root -->
+    <div id="root"></div>
+
+    <!-- Hide boot screen when React mounts -->
+    <script>
+      // Wait for React to render, then fade out boot
+      window.addEventListener('load', () => {
+        const boot = document.getElementById('boot');
+        if (boot) {
+          setTimeout(() => {
+            boot.classList.add('boot-hide');
+            setTimeout(() => boot.remove(), 500);
+          }, 400);
+        }
+      });
+      // Fallback: force hide after 4s max
+      setTimeout(() => {
+        const boot = document.getElementById('boot');
+        if (boot) { boot.classList.add('boot-hide'); setTimeout(() => boot.remove(), 500); }
+      }, 4000);
+    </script>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

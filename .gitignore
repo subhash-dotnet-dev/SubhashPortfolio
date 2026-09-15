@@ -481,3 +481,69 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 Thumbs.db) 
+
+# ═══════════════════════════════════════════════════════════════
+#  APP SECRETS — Never commit these
+# ═══════════════════════════════════════════════════════════════
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Local.json
+.env
+.env.local
+.env.development
+.env.production
+*.user
+secrets.json
+
+# ═══════════════════════════════════════════════════════════════
+#  BUILD ARTIFACTS
+# ═══════════════════════════════════════════════════════════════
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+
+# ═══════════════════════════════════════════════════════════════
+#  BACKUP FILES
+# ═══════════════════════════════════════════════════════════════
+*.bak
+*.bak.*
+*.old
+*.tmp
+*.log
+
+# ═══════════════════════════════════════════════════════════════
+#  OS FILES
+# ═══════════════════════════════════════════════════════════════
+.DS_Store
+Thumbs.db
+
+# ═══════════════════════════════════════════════════════════════
+#  VITE / REACT BUILD
+# ═══════════════════════════════════════════════════════════════
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# Vite logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor directories
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Production build
+frontend/portfolio-client/dist/
+frontend/portfolio-client/build/

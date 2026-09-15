@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SubhashPortfolio.Application.Common.Interfaces;
 using SubhashPortfolio.Application.Features.Contact.DTOs;
@@ -39,7 +39,7 @@ public class ContactController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "AdminOnly")]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
         var messages = await _contactService.GetAllAsync(cancellationToken);
@@ -47,7 +47,7 @@ public class ContactController : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "AdminOnly")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
     {
         var message = await _contactService.GetByIdAsync(id, cancellationToken);
@@ -55,7 +55,7 @@ public class ContactController : ControllerBase
     }
 
     [HttpPatch("{id:guid}/status")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "AdminOnly")]
     public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] UpdateContactMessageDto dto, CancellationToken cancellationToken)
     {
         var message = await _contactService.UpdateStatusAsync(id, dto, cancellationToken);
@@ -63,7 +63,7 @@ public class ContactController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "AdminOnly")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {
         await _contactService.DeleteAsync(id, cancellationToken);

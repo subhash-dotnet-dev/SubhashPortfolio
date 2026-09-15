@@ -1,0 +1,174 @@
+﻿/* ============================================================================
+ *  FLOATING WHATSAPP "CHAT WITH ME" BUTTON
+ * ========================================================================== */
+
+.float-wa {
+  position: fixed;
+  right: 24px;
+  bottom: 96px;
+  z-index: 9998;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px 14px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #25D366 0%, #1EAA52 100%);
+  color: #ffffff !important;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow:
+    0 16px 40px -8px rgba(37, 211, 102, 0.7),
+    0 4px 12px -4px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(37, 211, 102, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: float-wa-pulse 2.5s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.float-wa::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  z-index: -1;
+  opacity: 0.4;
+  filter: blur(12px);
+  animation: float-wa-glow 2.5s ease-in-out infinite;
+}
+
+.float-wa::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  animation: float-wa-shine 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float-wa-pulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes float-wa-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes float-wa-shine {
+  0% { left: -100%; }
+  50%, 100% { left: 130%; }
+}
+
+.float-wa:hover {
+  transform: translateY(-5px) scale(1.04);
+  background: linear-gradient(135deg, #2EE678 0%, #25D366 100%);
+  box-shadow:
+    0 22px 50px -8px rgba(37, 211, 102, 1),
+    0 6px 16px -4px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(37, 211, 102, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.float-wa-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  animation: float-wa-icon-wiggle 3s ease-in-out infinite;
+}
+
+@keyframes float-wa-icon-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  5% { transform: rotate(-12deg); }
+  10% { transform: rotate(12deg); }
+  15% { transform: rotate(-8deg); }
+  20% { transform: rotate(0deg); }
+}
+
+.float-wa-text {
+  white-space: nowrap;
+}
+
+/* ═══════ Mobile responsive ═══════ */
+@media (max-width: 640px) {
+  .float-wa {
+    right: 16px;
+    bottom: 84px;
+    padding: 14px;
+    gap: 0;
+  }
+  .float-wa-text {
+    display: none;
+  }
+  .float-wa-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 400px) {
+  .float-wa {
+    right: 14px;
+    bottom: 78px;
+    padding: 12px;
+  }
+}
+
+/* ═══════ Reduced motion ═══════ */
+@media (prefers-reduced-motion: reduce) {
+  .float-wa,
+  .float-wa::before,
+  .float-wa::after,
+  .float-wa-icon {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================================================
+ *  HIDE ON MOBILE — User feedback: too big, hiding on small screens
+ * ========================================================================== */
+
+
+
+@media (max-width: 768px) {
+  .float-wa {
+    width: 48px !important;
+    height: 48px !important;
+    padding: 0 !important;
+    right: 16px !important;
+    bottom: 80px !important;
+    border-radius: 50% !important;
+  }
+  .float-wa-text { display: none !important; }
+  .float-wa-icon svg { width: 22px !important; height: 22px !important; }
+}
+
+/* ============================================================================
+ *  FINAL: HIDE ON MOBILE — This overrides everything above
+ * ========================================================================== */
+
+@media (max-width: 768px) {
+  .float-wa,
+  .float-wa:hover,
+  .float-wa.is-visible {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: scale(0) !important;
+  }
+}
